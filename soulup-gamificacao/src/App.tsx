@@ -1,28 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-function Home() {
-  return <h1>Home</h1>
-}
-
-function Integrantes() {
-  return <h1>Integrantes</h1>
-}
-
-function Sobre() {
-  return <h1>Sobre</h1>
-}
-
-function FAQ() {
-  return <h1>FAQ</h1>
-}
-
-function Contato() {
-  return <h1>Contato</h1>
-}
-
-function Solucao() {
-  return <h1>Solução</h1>
-}
+import Home from './pages/Home/Home'
+import Integrantes from './pages/Integrantes/Integrantes'
+import Sobre from './pages/Sobre/Sobre'
+import FAQ from './pages/FAQ/FAQ'
+import Contato from './pages/Contato/Contato'
+import Solucao from './pages/Solucao/Solucao'
 
 function App() {
   return (
