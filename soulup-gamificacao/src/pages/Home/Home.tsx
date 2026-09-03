@@ -4,6 +4,9 @@ import pontuacao from '../../assets/imagens/img-12-pontuacao.jpg'
 import login from '../../assets/imagens/img-14-login.jpg'
 import dadosPessoais from '../../assets/imagens/img-15-dados-pessoais.jpg'
 import fundoSoulUp from '../../assets/imagens/fundo_SoulUp.png'
+import Card from '../../components/Card/Card'
+
+
 function Home() {
   return (
     <div className="min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf]">
@@ -53,135 +56,44 @@ function Home() {
 
       </section>
 
-      {/* Cards */}
-      <section className="flex flex-col gap-12 px-4 py-16 md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:grid-cols-2 lg:grid-cols-3">
 
-        {/* Primeira linha */}
-        <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-around">
+  <Card
+    titulo="Ranking"
+    emoji="🥇"
+    imagem={ranking}
+    descricao="O ranking permite acompanhar o desempenho dos usuários e estimula uma competição saudável."
+  />
 
-          {/* Ranking */}
-          <article className="flex min-h-[40rem] w-full max-w-[420px] flex-col items-center justify-center rounded-[20px] border-2 border-blue-600 bg-[#b1f8f6] p-4 text-center shadow-md transition-transform duration-200 hover:-translate-y-1.5 hover:shadow-2xl">
+  <Card
+    titulo="Missões"
+    emoji="🗒️"
+    imagem={missoes}
+    descricao="As missões apresentam desafios que ajudam o usuário a manter o foco e acompanhar seu progresso."
+  />
 
-            <div className="mb-8 flex w-[80%] items-center justify-center rounded-[10px] border border-black bg-[#c5fdfd] p-5">
-              <h2 className="text-2xl font-bold">
-                Ranking 🥇
-              </h2>
-            </div>
+  <Card
+    titulo="Pontos"
+    emoji="➕💯"
+    imagem={pontuacao}
+    descricao="Os pontos são conquistados conforme o usuário realiza atividades, permitindo avançar de nível e conquistar recompensas."
+  />
 
-            <img
-              src={ranking}
-              alt="Imagem representativa de primeiro e segundo lugar"
-              className="mb-3 h-auto max-h-[200px] w-[80%] rounded-[10px] border border-black object-cover"
-            />
+  <Card
+    titulo="Login"
+    emoji="🔐"
+    imagem={login}
+    descricao="O sistema permite um acesso rápido e seguro à plataforma."
+  />
 
-            <p className="px-4 text-base leading-relaxed">
-              Acompanhe sua posição e compare seu desempenho com outros
-              usuários. O ranking estimula a competitividade saudável e
-              incentiva a evolução contínua dentro da plataforma.
-            </p>
+  <Card
+    titulo="Dados Pessoais"
+    emoji="🎲👨‍🦲"
+    imagem={dadosPessoais}
+    descricao="O usuário pode gerenciar suas informações pessoais de maneira segura e utilizar esses dados para personalizar sua experiência."
+  />
 
-          </article>
-
-          {/* Missões */}
-          <article className="flex min-h-[40rem] w-full max-w-[420px] flex-col items-center justify-center rounded-[20px] border-2 border-blue-600 bg-[#b1f8f6] p-4 text-center shadow-md transition-transform duration-200 hover:-translate-y-1.5 hover:shadow-2xl">
-
-            <div className="mb-8 flex w-[80%] items-center justify-center rounded-[10px] border border-black bg-[#c5fdfd] p-5">
-              <h2 className="text-2xl font-bold">
-                Missões 🗒️
-              </h2>
-            </div>
-
-            <img
-              src={missoes}
-              alt="Imagem representativa das missões"
-              className="mb-3 h-auto max-h-[200px] w-[80%] rounded-[10px] border border-black object-cover"
-            />
-
-            <p className="px-4 text-base leading-relaxed">
-              Complete desafios e atividades propostas para avançar na
-              jornada. As missões são pensadas para engajar, orientar ações
-              e recompensar o progresso de forma dinâmica.
-            </p>
-
-          </article>
-
-          {/* Pontos */}
-          <article className="flex min-h-[40rem] w-full max-w-[420px] flex-col items-center justify-center rounded-[20px] border-2 border-blue-600 bg-[#b1f8f6] p-4 text-center shadow-md transition-transform duration-200 hover:-translate-y-1.5 hover:shadow-2xl">
-
-            <div className="mb-8 flex w-[80%] items-center justify-center rounded-[10px] border border-black bg-[#c5fdfd] p-5">
-              <h2 className="text-2xl font-bold">
-                Pontos ➕💯
-              </h2>
-            </div>
-
-            <img
-              src={pontuacao}
-              alt="Imagem representativa da pontuação"
-              className="mb-3 h-auto max-h-[200px] w-[80%] rounded-[10px] border border-black object-cover"
-            />
-
-            <p className="px-4 text-base leading-relaxed">
-              Acumule pontos a cada interação realizada. Eles representam
-              seu desempenho e podem ser utilizados para desbloquear
-              benefícios, recompensas ou novos níveis.
-            </p>
-
-          </article>
-
-        </div>
-
-        {/* Segunda linha */}
-        <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-center">
-
-          {/* Login */}
-          <article className="flex min-h-[40rem] w-full max-w-[420px] flex-col items-center justify-center rounded-[20px] border-2 border-blue-600 bg-[#b1f8f6] p-4 text-center shadow-md transition-transform duration-200 hover:-translate-y-1.5 hover:shadow-2xl">
-
-            <div className="mb-8 flex w-[80%] items-center justify-center rounded-[10px] border border-black bg-[#c5fdfd] p-5">
-              <h2 className="text-2xl font-bold">
-                Login 🔐
-              </h2>
-            </div>
-
-            <img
-              src={login}
-              alt="Imagem representativa do login"
-              className="mb-3 h-auto max-h-[200px] w-[80%] rounded-[10px] border border-black object-cover"
-            />
-
-            <p className="px-4 text-base leading-relaxed">
-              Faça seu acesso de forma rápida e segura para acompanhar seu
-              progresso, participar das atividades e aproveitar todos os
-              recursos disponíveis.
-            </p>
-
-          </article>
-
-          {/* Dados pessoais */}
-          <article className="flex min-h-[40rem] w-full max-w-[420px] flex-col items-center justify-center rounded-[20px] border-2 border-blue-600 bg-[#b1f8f6] p-4 text-center shadow-md transition-transform duration-200 hover:-translate-y-1.5 hover:shadow-2xl">
-
-            <div className="mb-8 flex w-[80%] items-center justify-center rounded-[10px] border border-black bg-[#c5fdfd] p-5">
-              <h2 className="text-2xl font-bold">
-                Dados Pessoais 🎲👨‍🦲
-              </h2>
-            </div>
-
-            <img
-              src={dadosPessoais}
-              alt="Imagem representativa dos dados pessoais"
-              className="mb-3 h-auto max-h-[200px] w-[80%] rounded-[10px] border border-black object-cover"
-            />
-
-            <p className="px-4 text-base leading-relaxed">
-              Gerencie suas informações com total controle e segurança.
-              Seus dados são protegidos e utilizados apenas para
-              personalizar sua experiência na plataforma.
-            </p>
-
-          </article>
-
-        </div>
-
-      </section>
+</div>
 
     </div>
   )
