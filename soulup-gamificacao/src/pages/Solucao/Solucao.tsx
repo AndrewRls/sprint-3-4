@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
+
 function Solucao() {
   return (
     <div className="min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10 md:px-8">
-      
+
       <section className="mx-auto max-w-7xl">
-        
+
         <div className="mb-10 text-center">
           <h1 className="text-4xl font-black md:text-6xl">
             Nossa Solução
@@ -27,6 +29,13 @@ function Solucao() {
               Realize missões e desafios para avançar dentro da
               plataforma e manter sua rotina mais organizada.
             </p>
+
+            <Link
+              to="/solucao/1"
+              className="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Ver detalhes
+            </Link>
           </article>
 
           <article className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-6 text-center shadow-lg transition duration-200 hover:-translate-y-1 hover:shadow-2xl">
@@ -38,6 +47,13 @@ function Solucao() {
               Acumule pontos conforme realiza suas atividades e
               evolua dentro do sistema.
             </p>
+
+            <Link
+              to="/solucao/2"
+              className="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Ver detalhes
+            </Link>
           </article>
 
           <article className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-6 text-center shadow-lg transition duration-200 hover:-translate-y-1 hover:shadow-2xl">
@@ -49,6 +65,13 @@ function Solucao() {
               Compare seu desempenho e acompanhe sua evolução
               através do ranking da plataforma.
             </p>
+
+            <Link
+              to="/solucao/3"
+              className="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Ver detalhes
+            </Link>
           </article>
 
           <article className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-6 text-center shadow-lg transition duration-200 hover:-translate-y-1 hover:shadow-2xl">
@@ -60,6 +83,13 @@ function Solucao() {
               Conforme você completa suas atividades, sua evolução
               permite alcançar novos níveis.
             </p>
+
+            <Link
+              to="/solucao/4"
+              className="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Ver detalhes
+            </Link>
           </article>
 
           <article className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-6 text-center shadow-lg transition duration-200 hover:-translate-y-1 hover:shadow-2xl">
@@ -71,6 +101,13 @@ function Solucao() {
               O sistema de recompensas incentiva a continuidade e
               torna o progresso mais divertido.
             </p>
+
+            <Link
+              to="/solucao/5"
+              className="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Ver detalhes
+            </Link>
           </article>
 
           <article className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-6 text-center shadow-lg transition duration-200 hover:-translate-y-1 hover:shadow-2xl">
@@ -82,6 +119,13 @@ function Solucao() {
               Acompanhe seus resultados e visualize sua evolução
               ao longo da jornada.
             </p>
+
+            <Link
+              to="/solucao/6"
+              className="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Ver detalhes
+            </Link>
           </article>
 
         </div>

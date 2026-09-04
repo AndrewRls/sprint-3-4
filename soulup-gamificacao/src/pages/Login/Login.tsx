@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import Button from '../../components/Button/Button'
 
 interface LoginFormData {
   email: string
@@ -98,12 +99,9 @@ function Login() {
           </div>
 
           {/* Botão */}
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
-          >
+          <Button type="submit">
             Entrar
-          </button>
+          </Button>
 
         </form>
 

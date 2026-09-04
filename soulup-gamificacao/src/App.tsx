@@ -10,6 +10,7 @@ import Contato from './pages/Contato/Contato'
 import Solucao from './pages/Solucao/Solucao'
 import Login from './pages/Login/Login'
 import Cadastro from './pages/Cadastro/Cadastro'
+import SolucaoDetalhe from './pages/SolucaoDetalhe/SolucaoDetalhe'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/solucao" element={<Solucao />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/solucao/:id" element={<SolucaoDetalhe />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>
