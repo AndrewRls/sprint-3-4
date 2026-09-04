@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SectionTitle from '../../components/SectionTitle/SectionTitle'
 
 function Contato() {
   const [enviado, setEnviado] = useState(false)
@@ -13,16 +14,10 @@ function Contato() {
 
       <section className="mx-auto max-w-3xl">
 
-        <div className="mb-10 text-center">
-          <h1 className="text-4xl font-black md:text-6xl">
-            Entre em Contato
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed md:text-xl">
-            Tem alguma dúvida, sugestão ou deseja saber mais sobre
-            a SoulUp? Envie uma mensagem para nossa equipe.
-          </p>
-        </div>
+        <SectionTitle
+          titulo="Entre em Contato"
+          descricao="Tem alguma dúvida, sugestão ou deseja saber mais sobre a SoulUp? Envie uma mensagem para nossa equipe."
+        />
 
         <form
           onSubmit={handleSubmit}

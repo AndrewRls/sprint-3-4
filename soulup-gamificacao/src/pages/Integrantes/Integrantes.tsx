@@ -2,6 +2,7 @@ import bryan from '../../assets/imagens/img-05-bryan-foto.png'
 import luis from '../../assets/imagens/img-06-luis-foto.png'
 import andrew from '../../assets/imagens/img-07-andrew-foto.png'
 import igor from '../../assets/imagens/img-08-igor-foto.jpg'
+import SectionTitle from '../../components/SectionTitle/SectionTitle'
 
 interface Integrante {
   nome: string
@@ -38,16 +39,10 @@ function Integrantes() {
 
       <section className="mx-auto max-w-6xl">
 
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-black md:text-6xl">
-            Integrantes
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed md:text-xl">
-            Conheça a equipe responsável pelo desenvolvimento da
-            SoulUp.
-          </p>
-        </div>
+        <SectionTitle
+          titulo="Integrantes"
+          descricao="Conheça a equipe responsável pelo desenvolvimento da SoulUp."
+        />
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 

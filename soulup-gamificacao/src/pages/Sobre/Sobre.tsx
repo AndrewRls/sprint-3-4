@@ -1,20 +1,15 @@
+import SectionTitle from '../../components/SectionTitle/SectionTitle'
+
 function Sobre() {
   return (
     <div className="min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10 md:px-8">
 
       <section className="mx-auto max-w-6xl">
 
-        <div className="mb-10 text-center">
-          <h1 className="text-4xl font-black md:text-6xl">
-            Sobre a SoulUp
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed md:text-xl">
-            Conheça melhor a SoulUp e entenda como nossa solução utiliza
-            a gamificação para tornar a organização e o desenvolvimento
-            pessoal mais motivadores.
-          </p>
-        </div>
+        <SectionTitle
+          titulo="Sobre a SoulUp"
+          descricao="Conheça melhor a SoulUp e entenda como nossa solução utiliza a gamificação para tornar a organização e o desenvolvimento pessoal mais motivadores."
+        />
 
         <div className="grid gap-8 md:grid-cols-2">
 

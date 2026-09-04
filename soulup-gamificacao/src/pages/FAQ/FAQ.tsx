@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SectionTitle from '../../components/SectionTitle/SectionTitle'
 
 interface Pergunta {
   pergunta: string
@@ -54,16 +55,10 @@ function FAQ() {
 
       <section className="mx-auto max-w-4xl">
 
-        <div className="mb-10 text-center">
-          <h1 className="text-4xl font-black md:text-6xl">
-            FAQ
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed md:text-xl">
-            Encontre respostas para as principais dúvidas sobre a
-            SoulUp.
-          </p>
-        </div>
+        <SectionTitle
+  titulo="FAQ"
+  descricao="Encontre respostas para as principais dúvidas sobre a SoulUp."
+/>
 
         <div className="flex flex-col gap-4">
 
