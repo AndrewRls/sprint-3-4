@@ -15,7 +15,7 @@ function Home() {
       <section
         className="min-h-[95vh] rounded-[20px] bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/src/assets/imagens/fundo_SoulUp.png')",
+          backgroundImage: `url(${fundoSoulUp})`,
         }}
       >
 
