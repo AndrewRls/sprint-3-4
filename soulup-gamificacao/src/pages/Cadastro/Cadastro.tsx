@@ -22,8 +22,8 @@ function Cadastro() {
   const senha = watch('senha')
 
   function onSubmit(data: CadastroFormData) {
-    console.log('Dados do cadastro:', data)
 
+    localStorage.setItem('soulup_usuario', JSON.stringify(data))
     // Como ainda não temos banco/API,
     // apenas simulamos o cadastro.
     navigate('/login')
