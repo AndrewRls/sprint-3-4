@@ -6,6 +6,21 @@ Através de missões, pontuação, níveis, ranking e recompensas, o usuário é
 
 Este repositório contém a continuação do projeto SoulUp, desenvolvida para a entrega das Sprints 3 e 4.
 
+Tecnologias Utilizadas:
+
+O projeto foi desenvolvido com as seguintes tecnologias e ferramentas:
+
+React — biblioteca para construção da interface
+TypeScript — tipagem estática para o JavaScript
+Vite — bundler e ambiente de desenvolvimento
+React Router DOM — gerenciamento de rotas da aplicação
+React Hook Form — gerenciamento e validação de formulários
+Tailwind CSS — estilização utilitária da interface
+ESLint — padronização e qualidade do código
+Git & GitHub — versionamento e hospedagem do código
+
+
+
 Estrutura de Pastas do Projeto:
 
 sprint-3-4/
@@ -38,6 +53,5 @@ sprint-3-4/
     ├── package.json
     ├── tsconfig.json
     └── vite.config.ts
-
 
 
