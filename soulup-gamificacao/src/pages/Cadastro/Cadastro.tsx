@@ -9,6 +9,12 @@ interface CadastroFormData {
   confirmarSenha: string
 }
 
+interface Usuario {
+  nome: string 
+  email: string
+  senha: string
+}
+
 function Cadastro() {
   const navigate = useNavigate()
 
@@ -22,10 +28,38 @@ function Cadastro() {
   const senha = watch('senha')
 
   function onSubmit(data: CadastroFormData) {
-    console.log('Dados do cadastro:', data)
+    //busca os usuários ja cadastrados
+    const usuariosSalvos = localStorage.getItem('soulup_usuarios')
 
-    // Como ainda não temos banco/API,
-    // apenas simulamos o cadastro.
+    //transforma os usuários encontrados em arrays
+    //se não cria um array vazio
+    const usuarios: Usuario[] = usuariosSalvos ?
+    JSON.parse(usuariosSalvos) : []
+
+    //verifica cadastro do email
+    const emailExiste = usuarios.some((usuario) => usuario.email === data.email)
+
+    if (emailExiste) {
+      alert('Este email ja está cadastrado!')
+      return
+    }
+
+    //cria o novo usuario
+    const novoUsuario = {
+      nome: data.nome, 
+      email: data.email, 
+      senha: data.senha
+    }
+
+    usuarios.push(novoUsuario)
+
+    localStorage.setItem(
+      'soulup_usuarios',
+      JSON.stringify(usuarios)
+    )
+
+    alert("Cadastro realizado com sucesso!")
+
     navigate('/login')
   }
 

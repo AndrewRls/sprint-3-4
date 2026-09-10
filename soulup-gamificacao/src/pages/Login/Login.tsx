@@ -7,6 +7,12 @@ interface LoginFormData {
   senha: string
 }
 
+interface Usuario {
+  nome: string
+  email: string
+  senha: string
+}
+
 function Login() {
   const navigate = useNavigate()
 
@@ -17,12 +23,33 @@ function Login() {
   } = useForm<LoginFormData>()
 
   function onSubmit(data: LoginFormData) {
-    console.log('Dados do login:', data)
+  const usuariosSalvos = localStorage.getItem('soulup_usuarios')
 
-    // Como ainda não temos banco/API,
-    // apenas simulamos o login.
-    navigate('/solucao')
+  if (!usuariosSalvos) {
+    alert('Nenhum usuário cadastrado.')
+    return
   }
+
+  const usuarios: Usuario[] = JSON.parse(usuariosSalvos)
+
+  const usuarioEncontrado = usuarios.find(
+    (usuario) =>
+      usuario.email === data.email &&
+      usuario.senha === data.senha
+  )
+
+  if (usuarioEncontrado) {
+    localStorage.setItem(
+      'soulup_usuario_logado',
+      JSON.stringify(usuarioEncontrado)
+    )
+
+    navigate('/solucao')
+  } else {
+    alert('E-mail ou senha incorretos.')
+  }
+}
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10">
