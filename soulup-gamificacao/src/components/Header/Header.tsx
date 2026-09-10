@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/imagens/img-01-logo.svg'
+import logo from '../../assets/imagens/img-01-logo.png'
 
 function Header() {
   const [menuAberto, setMenuAberto] = useState(false)
@@ -29,13 +29,13 @@ function Header() {
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <Link to="/" onClick={() => setMenuAberto(false)}>
-            <img
-              src={logo}
-              alt="Logo da SoulUP"
-              className="w-32"
-            />
-          </Link>
+            <Link to="/" onClick={() => setMenuAberto(false)}>
+              <img
+                src={logo}
+                alt="Logo da SoulUP"
+                className="w-32 fill-blue-50"
+              />
+            </Link>
 
           {/* Botão do menu mobile */}
           <button
