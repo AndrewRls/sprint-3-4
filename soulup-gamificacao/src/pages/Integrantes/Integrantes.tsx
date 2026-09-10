@@ -21,28 +21,28 @@ const integrantes: Integrante[] = [
     cargo: 'Desenvolvedor',
     imagem: bryan,
     github: 'https://github.com/BryanC0staDev',
-    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
+    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/'
   },
   {
     nome: 'Luis',
     cargo: 'Desenvolvedor',
     imagem: luis,
     github: 'https://github.com/luishdev0',
-    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
+    linkedin: 'https://www.linkedin.com/in/luis-rondao'
   },
   {
     nome: 'Andrew',
     cargo: 'Desenvolvedor',
     imagem: andrew,
     github: 'https://github.com/AndrewRls',
-    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
+    linkedin: 'https://www.linkedin.com/in/andrew-rls'
   },
   {
     nome: 'Igor',
     cargo: 'Desenvolvedor',
     imagem: igor,
     github: 'https://github.com/igorblacconaro',
-    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
+    linkedin: 'https://www.linkedin.com/in/igorblacconaro'
   },
 ]
 
@@ -81,6 +81,9 @@ function Integrantes() {
                
                 <a href={integrante.github} target="_blank" rel="noopener noreferrer" className="mt-4 flex gap-4">
                   <img src={github} alt="GitHub" className="w-8 h-8 hover:opacity-80 transition-opacity" />
+                </a>
+                 <a href={integrante.linkedin} target="_blank" rel="noopener noreferrer" className="mt-4 flex gap-4">
+                  <img src={linkedin} alt="linkedin" className="w-8 h-8 hover:opacity-80 transition-opacity" />
                 </a>
             </article>
 
