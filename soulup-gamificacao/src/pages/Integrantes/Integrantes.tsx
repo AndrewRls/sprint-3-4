@@ -2,12 +2,17 @@ import bryan from '../../assets/imagens/img-05-bryan-foto.png'
 import luis from '../../assets/imagens/img-06-luis-foto.png'
 import andrew from '../../assets/imagens/img-07-andrew-foto.png'
 import igor from '../../assets/imagens/img-08-igor-foto.jpg'
+import github from '../../assets/imagens/img-10-github.png'
+import linkedin from '../../assets/imagens/img-09-linkedin.png'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
+
 
 interface Integrante {
   nome: string
   cargo: string
   imagem: string
+  github: string
+  linkedin: string
 }
 
 const integrantes: Integrante[] = [
@@ -15,21 +20,29 @@ const integrantes: Integrante[] = [
     nome: 'Bryan',
     cargo: 'Desenvolvedor',
     imagem: bryan,
+    github: 'https://github.com/BryanC0staDev',
+    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
   },
   {
     nome: 'Luis',
     cargo: 'Desenvolvedor',
     imagem: luis,
+    github: 'https://github.com/luishdev0',
+    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
   },
   {
     nome: 'Andrew',
     cargo: 'Desenvolvedor',
     imagem: andrew,
+    github: 'https://github.com/AndrewRls',
+    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
   },
   {
     nome: 'Igor',
     cargo: 'Desenvolvedor',
     imagem: igor,
+    github: 'https://github.com/igorblacconaro',
+    linkedin: 'https://www.linkedin.com/in/bryan-costa-silva/"'
   },
 ]
 
@@ -64,7 +77,14 @@ function Integrantes() {
               <p className="mt-2 text-base">
                 {integrante.cargo}
               </p>
+
+               
+                <a href={integrante.github} target="_blank" rel="noopener noreferrer" className="mt-4 flex gap-4">
+                  <img src={github} alt="GitHub" className="w-8 h-8 hover:opacity-80 transition-opacity" />
+                </a>
             </article>
+
+
           ))}
 
         </div>
