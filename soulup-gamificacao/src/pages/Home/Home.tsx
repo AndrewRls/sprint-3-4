@@ -9,12 +9,11 @@ import Card from '../../components/Card/Card'
 
 function Home() {
   return (
-    <div className="min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf]">
+    <div className="min-h-screen bg-linear-to-b from-[#641ddf] to-[#55d4cf]">
 
       {/* Seção inicial */}
       <section
-        className="min-h-[95vh] rounded-[20px] bg-cover bg-center bg-no-repeat"
-        style={{
+          className="min-h-[95vh] bg-cover bg-center bg-no-repeat [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]"        style={{
           backgroundImage: `url(${fundoSoulUp})`,
         }}
       >

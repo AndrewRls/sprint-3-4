@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="w-full bg-blue-950 px-6 py-6 text-center text-white">
       <p className="text-sm">
-        © 2026 - Meu Projeto. Todos os direitos reservados.
+        © 2026 - Gamificação SoulUP. Todos os direitos reservados.
       </p>
     </footer>
   )
