@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { missaoService } from '../services/missaoService'
-import { useRequisicao } from './userequisicao'
+import { useRequisicao } from './useRequisicao'
 
 export function useMissoes() {
   const buscar = useCallback(
