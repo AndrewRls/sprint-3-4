@@ -1,87 +1,138 @@
-import { Link, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Carregando, MensagemErro } from '../../components/Feedback/Feedback'
+import { useAuth } from '../../hooks/useAuth'
+import { useMissao } from '../../hooks/useMissoes'
+import { ROTAS } from '../../routes/rotas'
+import { missaoService } from '../../services/missaoService'
+import type { EstadoAviso, EstadoLogin } from '../../types'
+import { rotularDificuldade } from '../../utils/dificuldade'
 
-interface Solucao {
-  titulo: string
-  descricao: string
-}
-
-const solucoes: Record<string, Solucao> = {
-  '1': {
-    titulo: 'Missões',
-    descricao:
-      'As missões são desafios que ajudam o usuário a manter o foco, realizar suas atividades e acompanhar seu progresso dentro da SoulUp.',
-  },
-  '2': {
-    titulo: 'Pontuação',
-    descricao:
-      'A pontuação é obtida conforme o usuário realiza atividades e missões, permitindo acompanhar sua evolução dentro da plataforma.',
-  },
-  '3': {
-    titulo: 'Ranking',
-    descricao:
-      'O ranking permite comparar o desempenho dos usuários e estimula uma competição saudável.',
-  },
-  '4': {
-    titulo: 'Níveis',
-    descricao:
-      'Os níveis representam a evolução do usuário conforme ele acumula pontos e completa suas atividades.',
-  },
-  '5': {
-    titulo: 'Recompensas',
-    descricao:
-      'As recompensas incentivam o usuário a continuar realizando suas atividades e alcançando seus objetivos.',
-  },
-  '6': {
-    titulo: 'Progresso',
-    descricao:
-      'O acompanhamento do progresso permite visualizar a evolução do usuário ao longo de sua jornada.',
-  },
-}
+const classeFundo =
+  'min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10 md:px-8'
 
 function SolucaoDetalhe() {
-  const { id } = useParams<{ id: string }>()
+  const { id = '' } = useParams<{ id: string }>()
+  const navigate = useNavigate()
+  const { usuario } = useAuth()
+  const { estado, recarregar } = useMissao(id)
+  const [excluindo, setExcluindo] = useState(false)
+  const [erroExclusao, setErroExclusao] = useState('')
 
-  const solucao = id ? solucoes[id] : undefined
+  async function excluir() {
+    if (!usuario) {
+      const login: EstadoLogin = {
+        mensagem: 'Faça login para excluir uma missão.',
+        origem: ROTAS.detalheMissao(id),
+      }
+      navigate(ROTAS.login, { state: login })
+      return
+    }
 
-  if (!solucao) {
+    if (!window.confirm('Tem certeza que deseja excluir esta missão?')) return
+
+    setExcluindo(true)
+    setErroExclusao('')
+
+    try {
+      await missaoService.excluir(id)
+      const aviso: EstadoAviso = { aviso: 'Missão excluída com sucesso!' }
+      navigate(ROTAS.solucao, { state: aviso })
+    } catch (erro) {
+      setErroExclusao(
+        erro instanceof Error ? erro.message : 'Não foi possível excluir.',
+      )
+      setExcluindo(false)
+    }
+  }
+
+  if (estado.status === 'carregando') {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4">
-        <section className="w-full max-w-2xl rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-8 text-center shadow-xl">
-          <h1 className="text-4xl font-black">Solução não encontrada</h1>
-
-          <p className="mt-4">
-            Não encontramos uma solução para o identificador informado.
-          </p>
-
-          <Link
-            to="/solucao"
-            className="mt-6 inline-block rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
-          >
-            Voltar para soluções
-          </Link>
-        </section>
+      <div className={classeFundo}>
+        <Carregando texto="Carregando missão..." />
       </div>
     )
   }
 
+  if (estado.status === 'erro') {
+    return (
+      <div className={classeFundo}>
+        <MensagemErro mensagem={estado.mensagem} onTentarNovamente={recarregar} />
+        <div className="mt-6 text-center">
+          <Link
+            to={ROTAS.solucao}
+            className="inline-block rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
+          >
+            Voltar para missões
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const missao = estado.dados
+
   return (
-    <div className="min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10 md:px-8">
+    <div className={classeFundo}>
       <section className="mx-auto max-w-3xl">
         <div className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-8 text-center shadow-xl md:p-12">
-          <h1 className="text-4xl font-black md:text-5xl">
-            {solucao.titulo}
-          </h1>
+          <h1 className="text-4xl font-black md:text-5xl">{missao.titulo}</h1>
 
           <p className="mt-6 text-base leading-relaxed md:text-xl">
-            {solucao.descricao}
+            {missao.descricao}
           </p>
 
-          <Link
-            to="/solucao"
-            className="mt-8 inline-block rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
-          >
-            Voltar para soluções
-          </Link>
+          <ul className="mt-6 flex flex-wrap justify-center gap-3 font-semibold">
+            <li className="rounded-full bg-purple-600 px-4 py-1 text-white">
+              {missao.pontos} pontos
+            </li>
+            <li className="rounded-full bg-blue-950 px-4 py-1 text-white">
+              Dificuldade: {rotularDificuldade(missao.dificuldade)}
+            </li>
+            <li
+              className={`rounded-full px-4 py-1 ${
+                missao.concluida
+                  ? 'bg-green-200 text-green-900'
+                  : 'bg-yellow-200 text-yellow-900'
+              }`}
+            >
+              {missao.concluida ? 'Concluída' : 'Pendente'}
+            </li>
+          </ul>
+
+          {erroExclusao && (
+            <p
+              role="alert"
+              className="mt-6 rounded-lg bg-red-100 p-4 font-semibold text-red-800"
+            >
+              {erroExclusao}
+            </p>
+          )}
+
+          <div className="mt-8 flex flex-col gap-3 xs:flex-row xs:justify-center">
+            <Link
+              to={ROTAS.editarMissao(missao.id)}
+              className="rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
+            >
+              Editar
+            </Link>
+
+            <button
+              type="button"
+              onClick={excluir}
+              disabled={excluindo}
+              className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 disabled:opacity-60"
+            >
+              {excluindo ? 'Excluindo...' : 'Excluir'}
+            </button>
+
+            <Link
+              to={ROTAS.solucao}
+              className="rounded-lg border-2 border-purple-600 px-6 py-3 font-bold text-purple-700 transition hover:bg-purple-100"
+            >
+              Voltar
+            </Link>
+          </div>
         </div>
       </section>
     </div>
