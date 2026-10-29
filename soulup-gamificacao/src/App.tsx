@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AuthProvider from './context/AuthProvider'
 
 import MainLayout from './components/MainLayout/MainLayout'
 
@@ -15,6 +16,7 @@ import Cadastro from './pages/Cadastro/Cadastro'
 function App() {
   return (
     <BrowserRouter>
+      <AuthProvider>
       <MainLayout>
         <Routes>
 
@@ -38,6 +40,7 @@ function App() {
 
         </Routes>
       </MainLayout>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
