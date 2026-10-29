@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Breakpoint extra pequeno (celulares até ~480px): xs: */
+@theme {
+  --breakpoint-xs: 30rem;
+}
