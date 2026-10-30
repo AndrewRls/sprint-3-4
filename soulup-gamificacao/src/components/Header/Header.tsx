@@ -1,168 +1,113 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/imagens/img-01-logo.png'
+import { useAuth } from '../../hooks/useAuth'
+import { ROTAS } from '../../routes/rotas'
+
+interface LinkMenu {
+  texto: string
+  para: string
+}
+
+const links: LinkMenu[] = [
+  { texto: 'Home', para: ROTAS.home },
+  { texto: 'Solução', para: ROTAS.solucao },
+  { texto: 'Sobre', para: ROTAS.sobre },
+  { texto: 'Integrantes', para: ROTAS.integrantes },
+  { texto: 'Contato', para: ROTAS.contato },
+  { texto: 'FAQ', para: ROTAS.faq },
+]
+
+const classeLink = 'text-white transition hover:text-purple-400'
+const classeBotao =
+  'rounded-lg bg-purple-600 px-4 py-2 text-center font-semibold text-white transition hover:bg-purple-700'
 
 function Header() {
   const [menuAberto, setMenuAberto] = useState(false)
+  const { usuario, sair } = useAuth()
+  const navigate = useNavigate()
+
   useEffect(() => {
-  function verificarTamanhoTela() {
-    if (window.innerWidth >= 768) {
-      setMenuAberto(false)
+    function verificarTamanhoTela() {
+      if (window.innerWidth >= 768) {
+        setMenuAberto(false)
+      }
     }
+
+    window.addEventListener('resize', verificarTamanhoTela)
+
+    return () => {
+      window.removeEventListener('resize', verificarTamanhoTela)
+    }
+  }, [])
+
+  function fecharMenu() {
+    setMenuAberto(false)
   }
 
-  window.addEventListener('resize', verificarTamanhoTela)
-
-  return () => {
-    window.removeEventListener('resize', verificarTamanhoTela)
+  function aoSair() {
+    sair()
+    fecharMenu()
+    navigate(ROTAS.home)
   }
-}, [])
 
-  function alternarMenu() {
-    setMenuAberto(!menuAberto)
-  }
+  const acaoConta = usuario ? (
+    <button type="button" onClick={aoSair} className={classeBotao}>
+      Sair ({usuario.nome.split(' ')[0]})
+    </button>
+  ) : (
+    <Link to={ROTAS.login} onClick={fecharMenu} className={classeBotao}>
+      Login
+    </Link>
+  )
 
   return (
-    <header className="w-full bg-black px-6 py-4 shadow-md">
+    <header className="w-full bg-black px-6 py-4 shadow-md xl:px-12">
       <nav className="mx-auto max-w-7xl">
-
         <div className="flex items-center justify-between">
-          
           {/* Logo */}
-            <Link to="/" onClick={() => setMenuAberto(false)}>
-              <img
-                src={logo}
-                alt="Logo da SoulUP"
-                className="w-32 fill-blue-50"
-              />
-            </Link>
+          <Link to={ROTAS.home} onClick={fecharMenu}>
+            <img src={logo} alt="Logo da SoulUP" className="w-32" />
+          </Link>
 
           {/* Botão do menu mobile */}
           <button
             type="button"
-            onClick={alternarMenu}
+            onClick={() => setMenuAberto(!menuAberto)}
             className="text-3xl text-white md:hidden"
-            aria-label="Abrir menu"
+            aria-label={menuAberto ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={menuAberto}
           >
             {menuAberto ? '✕' : '☰'}
           </button>
 
           {/* Menu desktop */}
-          <div className="hidden items-center gap-6 md:flex">
-            <Link
-              to="/"
-              className="text-white transition hover:text-purple-400"
-            >
-              Home
-            </Link>
-
-            <Link
-              to="/solucao"
-              className="text-white transition hover:text-purple-400"
-            >
-              Solução
-            </Link>
-
-            <Link
-              to="/sobre"
-              className="text-white transition hover:text-purple-400"
-            >
-              Sobre
-            </Link>
-
-            <Link
-              to="/integrantes"
-              className="text-white transition hover:text-purple-400"
-            >
-              Integrantes
-            </Link>
-
-            <Link
-              to="/contato"
-              className="text-white transition hover:text-purple-400"
-            >
-              Contato
-            </Link>
-
-            <Link
-              to="/faq"
-              className="text-white transition hover:text-purple-400"
-            >
-              FAQ
-            </Link>
-
-            <Link
-              to="/login"
-              className="rounded-lg bg-purple-600 px-4 py-2 font-semibold text-white transition hover:bg-purple-700"
-            >
-              Login
-            </Link>
+          <div className="hidden items-center gap-6 md:flex xl:gap-8">
+            {links.map((item) => (
+              <Link key={item.para} to={item.para} className={classeLink}>
+                {item.texto}
+              </Link>
+            ))}
+            {acaoConta}
           </div>
         </div>
 
         {/* Menu mobile */}
         {menuAberto && (
           <div className="mt-4 flex flex-col gap-4 border-t border-gray-700 pt-4 md:hidden">
-
-            <Link
-              to="/"
-              onClick={() => setMenuAberto(false)}
-              className="text-white transition hover:text-purple-400"
-            >
-              Home
-            </Link>
-
-            <Link
-              to="/solucao"
-              onClick={() => setMenuAberto(false)}
-              className="text-white transition hover:text-purple-400"
-            >
-              Solução
-            </Link>
-
-            <Link
-              to="/sobre"
-              onClick={() => setMenuAberto(false)}
-              className="text-white transition hover:text-purple-400"
-            >
-              Sobre
-            </Link>
-
-            <Link
-              to="/integrantes"
-              onClick={() => setMenuAberto(false)}
-              className="text-white transition hover:text-purple-400"
-            >
-              Integrantes
-            </Link>
-
-            <Link
-              to="/contato"
-              onClick={() => setMenuAberto(false)}
-              className="text-white transition hover:text-purple-400"
-            >
-              Contato
-            </Link>
-
-            <Link
-              to="/faq"
-              onClick={() => setMenuAberto(false)}
-              className="text-white transition hover:text-purple-400"
-            >
-              FAQ
-            </Link>
-
-            <Link
-              to="/login"
-              onClick={() => setMenuAberto(false)}
-              className="rounded-lg bg-purple-600 px-4 py-2 text-center font-semibold text-white transition hover:bg-purple-700"
-            >
-              Login
-            </Link>
-
+            {links.map((item) => (
+              <Link
+                key={item.para}
+                to={item.para}
+                onClick={fecharMenu}
+                className={classeLink}
+              >
+                {item.texto}
+              </Link>
+            ))}
+            {acaoConta}
           </div>
         )}
-
       </nav>
     </header>
   )
