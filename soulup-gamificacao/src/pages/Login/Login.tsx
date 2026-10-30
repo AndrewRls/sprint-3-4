@@ -1,20 +1,24 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button/Button'
+import { useAuth } from '../../hooks/useAuth'
+import { ROTAS } from '../../routes/rotas'
+import type { EstadoLogin } from '../../types'
 
 interface LoginFormData {
   email: string
   senha: string
 }
 
-interface Usuario {
-  nome: string
-  email: string
-  senha: string
-}
-
 function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const { entrar } = useAuth()
+  const [erroLogin, setErroLogin] = useState('')
+
+  // Mensagem vinda de um redirecionamento (ex.: rota protegida ou cadastro)
+  const estado = location.state as EstadoLogin | null
 
   const {
     register,
@@ -23,33 +27,15 @@ function Login() {
   } = useForm<LoginFormData>()
 
   function onSubmit(data: LoginFormData) {
-  const usuariosSalvos = localStorage.getItem('soulup_usuarios')
+    const ok = entrar(data.email, data.senha)
 
-  if (!usuariosSalvos) {
-    alert('Nenhum usuário cadastrado.')
-    return
+    if (!ok) {
+      setErroLogin('E-mail ou senha incorretos.')
+      return
+    }
+
+    navigate(estado?.origem ?? ROTAS.solucao, { replace: true })
   }
-
-  const usuarios: Usuario[] = JSON.parse(usuariosSalvos)
-
-  const usuarioEncontrado = usuarios.find(
-    (usuario) =>
-      usuario.email === data.email &&
-      usuario.senha === data.senha
-  )
-
-  if (usuarioEncontrado) {
-    localStorage.setItem(
-      'soulup_usuario_logado',
-      JSON.stringify(usuarioEncontrado)
-    )
-
-    navigate('/solucao')
-  } else {
-    alert('E-mail ou senha incorretos.')
-  }
-}
-
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10">
@@ -62,6 +48,14 @@ function Login() {
             Entre na sua conta SoulUp
           </p>
         </div>
+                {estado?.mensagem && (
+          <p
+            role="status"
+            className="mb-6 rounded-lg bg-yellow-100 p-4 text-center font-semibold text-yellow-900"
+          >
+            {estado.mensagem}
+          </p>
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
@@ -125,6 +119,15 @@ function Login() {
             )}
           </div>
 
+                      {erroLogin && (
+            <p
+              role="alert"
+              className="rounded-lg bg-red-100 p-4 text-center font-semibold text-red-800"
+            >
+              {erroLogin}
+            </p>
+          )}
+
           {/* Botão */}
           <Button type="submit">
             Entrar
@@ -138,7 +141,7 @@ function Login() {
           </p>
 
           <Link
-            to="/cadastro"
+            to={ROTAS.cadastro}
             className="mt-2 inline-block font-bold text-purple-700 hover:underline"
           >
             Criar uma conta

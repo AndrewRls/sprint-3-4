@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button/Button'
+import { ROTAS } from '../../routes/rotas'
+import { authService } from '../../services/authService'
+import type { EstadoLogin } from '../../types'
 
 interface CadastroFormData {
   nome: string
@@ -9,60 +13,34 @@ interface CadastroFormData {
   confirmarSenha: string
 }
 
-interface Usuario {
-  nome: string 
-  email: string
-  senha: string
-}
-
 function Cadastro() {
   const navigate = useNavigate()
+  const [erroCadastro, setErroCadastro] = useState('')
 
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
     formState: { errors },
   } = useForm<CadastroFormData>()
 
-  const senha = watch('senha')
-
   function onSubmit(data: CadastroFormData) {
-    //busca os usuários ja cadastrados
-    const usuariosSalvos = localStorage.getItem('soulup_usuarios')
+    const resultado = authService.cadastrar({
+      nome: data.nome,
+      email: data.email,
+      senha: data.senha,
+    })
 
-    //transforma os usuários encontrados em arrays
-    //se não cria um array vazio
-    const usuarios: Usuario[] = usuariosSalvos ?
-    JSON.parse(usuariosSalvos) : []
-
-    //verifica cadastro do email
-    const emailExiste = usuarios.some((usuario) => usuario.email === data.email)
-
-    if (emailExiste) {
-      alert('Este email ja está cadastrado!')
+    if (resultado === 'email-existe') {
+      setErroCadastro('Este e-mail já está cadastrado.')
       return
     }
 
-    //cria o novo usuario
-    const novoUsuario = {
-      nome: data.nome, 
-      email: data.email, 
-      senha: data.senha
+    const estado: EstadoLogin = {
+      mensagem: 'Cadastro realizado com sucesso! Faça login para continuar.',
     }
-
-    usuarios.push(novoUsuario)
-
-    localStorage.setItem(
-      'soulup_usuarios',
-      JSON.stringify(usuarios)
-    )
-
-    alert("Cadastro realizado com sucesso!")
-
-    navigate('/login')
+    navigate(ROTAS.login, { state: estado })
   }
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10">
       <section className="w-full max-w-md rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-6 shadow-xl md:p-10">
@@ -188,7 +166,7 @@ function Cadastro() {
               {...register('confirmarSenha', {
                 required: 'Confirme sua senha',
                 validate: (value) =>
-                  value === senha || 'As senhas não coincidem',
+                  value === getValues('senha') || 'As senhas não coincidem',
               })}
               className="w-full rounded-lg border-2 border-gray-400 bg-white px-4 py-3 outline-none transition focus:border-blue-600"
             />
@@ -199,6 +177,15 @@ function Cadastro() {
               </p>
             )}
           </div>
+
+                    {erroCadastro && (
+            <p
+              role="alert"
+              className="rounded-lg bg-red-100 p-4 text-center font-semibold text-red-800"
+            >
+              {erroCadastro}
+            </p>
+          )}
 
           {/* Botão */}
           <Button type="submit">
@@ -213,7 +200,7 @@ function Cadastro() {
           </p>
 
           <Link
-            to="/login"
+            to={ROTAS.login}
             className="mt-2 inline-block font-bold text-purple-700 hover:underline"
           >
             Fazer login
