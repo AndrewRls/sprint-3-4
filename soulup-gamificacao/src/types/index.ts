@@ -45,3 +45,69 @@ export type NovaMissao = MissaoBase
 
 // Usuário salvo no cadastro = usuário + senha
 export type UsuarioCadastro = Usuario & { senha: string }
+
+// =====================================================================
+// Tipos da API Java (back-end SoulUp: usuários e posts)
+// =====================================================================
+
+// Union Type: nível calculado no front a partir dos pontos do usuário
+export type NivelRanking = 'Bronze' | 'Prata' | 'Ouro'
+
+export interface Endereco {
+  cep: string
+  logradouro: string
+  numero: string
+  bairro: string
+  localidade: string
+  estado: string
+}
+
+// Usuário exatamente como a API devolve (login e ranking)
+export interface UsuarioApi {
+  nome: string
+  cpf: string
+  apelido: string
+  email: string
+  sexo: string
+  idade: number
+  pontos: number
+  curtidas: number
+  qntPosts: number
+  seguidores: number
+  seguindo: number
+  endereco: Endereco | null
+  // A API devolve a senha no login. O front nunca deve guardá-la.
+  senha?: string | null
+}
+
+// Usuário logado no front = usuário da API sem a senha
+export type UsuarioLogado = Omit<UsuarioApi, 'senha'>
+
+export interface Credenciais {
+  email: string
+  senha: string
+}
+
+// Dados enviados no cadastro (POST /usuarios)
+export type NovoUsuario = Pick<
+  UsuarioApi,
+  'nome' | 'cpf' | 'apelido' | 'email' | 'sexo' | 'idade'
+> & {
+  senha: string
+  endereco: Endereco
+}
+
+// Dados enviados ao criar um post (POST /posts)
+export interface NovoPost {
+  conteudo: string
+  cpfUsuario: string
+}
+
+// Campos que o back-end gera para cada post
+export interface PostIdentificado {
+  idPost: number
+  nomeAutor: string
+}
+
+// Post que vem da API = dados do post + campos gerados (Intersection Type)
+export type Post = NovoPost & PostIdentificado
