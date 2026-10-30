@@ -55,7 +55,7 @@ function Home() {
 
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
 
   <Card
     titulo="Ranking"
