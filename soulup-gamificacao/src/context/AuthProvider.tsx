@@ -1,17 +1,18 @@
 import { useState, type ReactNode } from 'react'
 import { authService } from '../services/authService'
-import type { Usuario } from '../types'
+import { usuarioService } from '../services/usuarioService'
+import type { Credenciais, UsuarioLogado } from '../types'
 import { AuthContext } from './authContext'
 
 function AuthProvider({ children }: { children: ReactNode }) {
-  const [usuario, setUsuario] = useState<Usuario | null>(() =>
+  const [usuario, setUsuario] = useState<UsuarioLogado | null>(() =>
     authService.obterSessao(),
   )
 
-  function entrar(email: string, senha: string): boolean {
-    const logado = authService.entrar(email, senha)
+  async function entrar(credenciais: Credenciais): Promise<void> {
+    const logado = await usuarioService.entrar(credenciais)
+    authService.salvarSessao(logado)
     setUsuario(logado)
-    return logado !== null
   }
 
   function sair() {

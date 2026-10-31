@@ -16,6 +16,7 @@ function Login() {
   const location = useLocation()
   const { entrar } = useAuth()
   const [erroLogin, setErroLogin] = useState('')
+  const [enviando, setEnviando] = useState(false)
 
   // Mensagem vinda de um redirecionamento (ex.: rota protegida ou cadastro)
   const estado = location.state as EstadoLogin | null
@@ -26,15 +27,19 @@ function Login() {
     formState: { errors },
   } = useForm<LoginFormData>()
 
-  function onSubmit(data: LoginFormData) {
-    const ok = entrar(data.email, data.senha)
+  async function onSubmit(data: LoginFormData) {
+    setEnviando(true)
+    setErroLogin('')
 
-    if (!ok) {
-      setErroLogin('E-mail ou senha incorretos.')
-      return
+    try {
+      await entrar({ email: data.email.trim(), senha: data.senha })
+      navigate(estado?.origem ?? ROTAS.solucao, { replace: true })
+    } catch (erro) {
+      setErroLogin(
+        erro instanceof Error ? erro.message : 'Não foi possível entrar.',
+      )
+      setEnviando(false)
     }
-
-    navigate(estado?.origem ?? ROTAS.solucao, { replace: true })
   }
 
   return (
@@ -129,10 +134,16 @@ function Login() {
           )}
 
           {/* Botão */}
-          <Button type="submit">
-            Entrar
-          </Button>
+                  {enviando && (
+            <p role="status" className="text-center text-sm font-semibold">
+              Conectando ao servidor... na primeira vez pode levar até 1 minuto.
+            </p>
+          )}
 
+          {/* Botão */}
+          <Button type="submit" disabled={enviando}>
+            {enviando ? 'Entrando...' : 'Entrar'}
+          </Button>
         </form>
 
         <div className="mt-6 text-center">
