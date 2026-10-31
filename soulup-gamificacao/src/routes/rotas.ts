@@ -6,6 +6,8 @@ export const ROTAS = {
   faq: '/faq',
   contato: '/contato',
   solucao: '/solucao',
+  ranking: '/ranking',
+  perfil: '/perfil',
   novaMissao: '/solucao/nova',
   novoPost: '/solucao/nova',
   login: '/login',

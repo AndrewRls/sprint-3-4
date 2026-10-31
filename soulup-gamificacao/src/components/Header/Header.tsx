@@ -12,6 +12,7 @@ interface LinkMenu {
 const links: LinkMenu[] = [
   { texto: 'Home', para: ROTAS.home },
   { texto: 'Solução', para: ROTAS.solucao },
+  { texto: 'Ranking', para: ROTAS.ranking },
   { texto: 'Sobre', para: ROTAS.sobre },
   { texto: 'Integrantes', para: ROTAS.integrantes },
   { texto: 'Contato', para: ROTAS.contato },
@@ -26,6 +27,10 @@ function Header() {
   const [menuAberto, setMenuAberto] = useState(false)
   const { usuario, sair } = useAuth()
   const navigate = useNavigate()
+    // "Perfil" só aparece para quem está logado
+  const linksVisiveis: LinkMenu[] = usuario
+    ? [...links, { texto: 'Perfil', para: ROTAS.perfil }]
+    : links
 
   useEffect(() => {
     function verificarTamanhoTela() {
@@ -83,7 +88,7 @@ function Header() {
 
           {/* Menu desktop */}
           <div className="hidden items-center gap-6 md:flex xl:gap-8">
-            {links.map((item) => (
+            {linksVisiveis.map((item) => (
               <Link key={item.para} to={item.para} className={classeLink}>
                 {item.texto}
               </Link>
@@ -95,7 +100,7 @@ function Header() {
         {/* Menu mobile */}
         {menuAberto && (
           <div className="mt-4 flex flex-col gap-4 border-t border-gray-700 pt-4 md:hidden">
-            {links.map((item) => (
+            {linksVisiveis.map((item) => (
               <Link
                 key={item.para}
                 to={item.para}

@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-
+import Perfil from './pages/Perfil/Perfil'
 import AuthProvider from './context/AuthProvider'
 import MainLayout from './components/MainLayout/MainLayout'
 import RotaProtegida from './components/RotaProtegida/RotaProtegida'
 import { ROTAS } from './routes/rotas'
-
+import Ranking from './pages/Ranking/Ranking'
 import Home from './pages/Home/Home'
 import Sobre from './pages/Sobre/Sobre'
 import Integrantes from './pages/Integrantes/Integrantes'
@@ -34,6 +34,15 @@ function App() {
 
             {/* Solução (consome a API) */}
             <Route path={ROTAS.solucao} element={<Solucao />} />
+            <Route path={ROTAS.ranking} element={<Ranking />} />
+            <Route
+              path={ROTAS.perfil}
+              element={
+                <RotaProtegida>
+                  <Perfil />
+                </RotaProtegida>
+              }
+            />
             <Route
               path={ROTAS.novaMissao}
               element={
