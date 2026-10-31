@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Carregando, MensagemErro, Vazio } from '../../components/Feedback/Feedback'
-import MissaoCard from '../../components/MissaoCard/MissaoCard'
+import PostCard from '../../components/PostCard/PostCard'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
-import { useMissoes } from '../../hooks/useMissoes'
+import { usePosts } from '../../hooks/usePosts'
 import { ROTAS } from '../../routes/rotas'
 import type { EstadoAviso } from '../../types'
 
@@ -45,7 +45,7 @@ const conceitos: Conceito[] = [
 ]
 
 function Solucao() {
-  const { estado, recarregar } = useMissoes()
+  const { estado, recarregar } = usePosts()
   const location = useLocation()
   const aviso = (location.state as EstadoAviso | null)?.aviso
 
@@ -70,7 +70,7 @@ function Solucao() {
         </div>
 
         <h2 className="mb-6 text-center text-3xl font-black md:text-4xl">
-          Missões cadastradas
+          Mural da comunidade
         </h2>
 
         {aviso && (
@@ -84,15 +84,15 @@ function Solucao() {
 
         <div className="mb-8 flex justify-center">
           <Link
-            to={ROTAS.novaMissao}
+            to={ROTAS.novoPost}
             className="rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
           >
-            + Nova missão
+            + Novo post
           </Link>
         </div>
 
         {estado.status === 'carregando' && (
-          <Carregando texto="Carregando missões..." />
+          <Carregando texto="Carregando posts... na primeira vez o servidor pode levar até 1 minuto para acordar." />
         )}
 
         {estado.status === 'erro' && (
@@ -100,14 +100,16 @@ function Solucao() {
         )}
 
         {estado.status === 'sucesso' && estado.dados.length === 0 && (
-          <Vazio mensagem="Nenhuma missão cadastrada ainda. Crie a primeira!" />
+          <Vazio mensagem="Nenhum post publicado ainda. Seja o primeiro!" />
         )}
 
         {estado.status === 'sucesso' && estado.dados.length > 0 && (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {estado.dados.map((missao) => (
-              <MissaoCard key={missao.id} missao={missao} />
-            ))}
+            {[...estado.dados]
+              .sort((a, b) => b.idPost - a.idPost)
+              .map((post) => (
+                <PostCard key={post.idPost} post={post} />
+              ))}
           </div>
         )}
       </section>

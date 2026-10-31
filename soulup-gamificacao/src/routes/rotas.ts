@@ -7,6 +7,7 @@ export const ROTAS = {
   contato: '/contato',
   solucao: '/solucao',
   novaMissao: '/solucao/nova',
+  novoPost: '/solucao/nova',
   login: '/login',
   cadastro: '/cadastro',
   // rotas dinâmicas (recebem parâmetro)
