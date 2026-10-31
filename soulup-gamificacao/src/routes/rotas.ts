@@ -12,4 +12,5 @@ export const ROTAS = {
   // rotas dinâmicas (recebem parâmetro)
   detalheMissao: (id: number | string) => `/solucao/${id}`,
   editarMissao: (id: number | string) => `/solucao/${id}/editar`,
+  detalhePost: (id: number | string) => `/solucao/${id}`,
 } as const
