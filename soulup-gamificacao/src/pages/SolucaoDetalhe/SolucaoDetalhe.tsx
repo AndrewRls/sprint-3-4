@@ -1,55 +1,21 @@
-import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Carregando, MensagemErro } from '../../components/Feedback/Feedback'
 import { useAuth } from '../../hooks/useAuth'
-import { useMissao } from '../../hooks/useMissoes'
+import { usePost } from '../../hooks/usePosts'
 import { ROTAS } from '../../routes/rotas'
-import { missaoService } from '../../services/missaoService'
-import type { EstadoAviso, EstadoLogin } from '../../types'
-import { rotularDificuldade } from '../../utils/dificuldade'
 
 const classeFundo =
   'min-h-screen bg-linear-to-r from-[#fbfcf7] to-[#55d4cf] px-4 py-10 md:px-8'
 
 function SolucaoDetalhe() {
   const { id = '' } = useParams<{ id: string }>()
-  const navigate = useNavigate()
   const { usuario } = useAuth()
-  const { estado, recarregar } = useMissao(id)
-  const [excluindo, setExcluindo] = useState(false)
-  const [erroExclusao, setErroExclusao] = useState('')
-
-  async function excluir() {
-    if (!usuario) {
-      const login: EstadoLogin = {
-        mensagem: 'Faça login para excluir uma missão.',
-        origem: ROTAS.detalheMissao(id),
-      }
-      navigate(ROTAS.login, { state: login })
-      return
-    }
-
-    if (!window.confirm('Tem certeza que deseja excluir esta missão?')) return
-
-    setExcluindo(true)
-    setErroExclusao('')
-
-    try {
-      await missaoService.excluir(id)
-      const aviso: EstadoAviso = { aviso: 'Missão excluída com sucesso!' }
-      navigate(ROTAS.solucao, { state: aviso })
-    } catch (erro) {
-      setErroExclusao(
-        erro instanceof Error ? erro.message : 'Não foi possível excluir.',
-      )
-      setExcluindo(false)
-    }
-  }
+  const { estado, recarregar } = usePost(id)
 
   if (estado.status === 'carregando') {
     return (
       <div className={classeFundo}>
-        <Carregando texto="Carregando missão..." />
+        <Carregando texto="Carregando post..." />
       </div>
     )
   }
@@ -63,77 +29,65 @@ function SolucaoDetalhe() {
             to={ROTAS.solucao}
             className="inline-block rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
           >
-            Voltar para missões
+            Voltar para o mural
           </Link>
         </div>
       </div>
     )
   }
 
-  const missao = estado.dados
+  const post = estado.dados
+  const inicial = (post.nomeAutor || '?').charAt(0).toUpperCase()
+  const ehAutor = usuario !== null && usuario.cpf === post.cpfUsuario
 
   return (
     <div className={classeFundo}>
       <section className="mx-auto max-w-3xl">
-        <div className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-8 text-center shadow-xl md:p-12">
-          <h1 className="text-4xl font-black md:text-5xl">{missao.titulo}</h1>
+        <article className="rounded-2xl border-2 border-blue-600 bg-[#b1f8f6] p-8 shadow-xl md:p-12">
+          <header className="mb-6 flex items-center gap-4">
+            <span
+              aria-hidden="true"
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-purple-600 text-2xl font-bold text-white"
+            >
+              {inicial}
+            </span>
 
-          <p className="mt-6 text-base leading-relaxed md:text-xl">
-            {missao.descricao}
+            <div className="min-w-0">
+              <h1 className="truncate text-2xl font-black md:text-4xl">
+                {post.nomeAutor}
+              </h1>
+              <p className="text-sm font-semibold text-gray-700">
+                Post #{post.idPost}
+              </p>
+            </div>
+          </header>
+
+          <p className="text-base leading-relaxed whitespace-pre-line md:text-xl [overflow-wrap:anywhere]">
+            {post.conteudo}
           </p>
 
-          <ul className="mt-6 flex flex-wrap justify-center gap-3 font-semibold">
-            <li className="rounded-full bg-purple-600 px-4 py-1 text-white">
-              {missao.pontos} pontos
-            </li>
-            <li className="rounded-full bg-blue-950 px-4 py-1 text-white">
-              Dificuldade: {rotularDificuldade(missao.dificuldade)}
-            </li>
-            <li
-              className={`rounded-full px-4 py-1 ${
-                missao.concluida
-                  ? 'bg-green-200 text-green-900'
-                  : 'bg-yellow-200 text-yellow-900'
-              }`}
-            >
-              {missao.concluida ? 'Concluída' : 'Pendente'}
-            </li>
-          </ul>
-
-          {erroExclusao && (
-            <p
-              role="alert"
-              className="mt-6 rounded-lg bg-red-100 p-4 font-semibold text-red-800"
-            >
-              {erroExclusao}
+          {ehAutor && (
+            <p className="mt-6 inline-block rounded-full bg-green-200 px-4 py-1 text-sm font-semibold text-green-900">
+              Você é o autor deste post
             </p>
           )}
 
           <div className="mt-8 flex flex-col gap-3 xs:flex-row xs:justify-center">
             <Link
-              to={ROTAS.editarMissao(missao.id)}
-              className="rounded-lg bg-purple-600 px-6 py-3 font-bold text-white transition hover:bg-purple-700"
+              to={ROTAS.solucao}
+              className="rounded-lg border-2 border-purple-600 px-6 py-3 text-center font-bold text-purple-700 transition hover:bg-purple-100"
             >
-              Editar
+              Voltar ao mural
             </Link>
-
-            <button
-              type="button"
-              onClick={excluir}
-              disabled={excluindo}
-              className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 disabled:opacity-60"
-            >
-              {excluindo ? 'Excluindo...' : 'Excluir'}
-            </button>
 
             <Link
-              to={ROTAS.solucao}
-              className="rounded-lg border-2 border-purple-600 px-6 py-3 font-bold text-purple-700 transition hover:bg-purple-100"
+              to={ROTAS.novoPost}
+              className="rounded-lg bg-purple-600 px-6 py-3 text-center font-bold text-white transition hover:bg-purple-700"
             >
-              Voltar
+              + Novo post
             </Link>
           </div>
-        </div>
+        </article>
       </section>
     </div>
   )
