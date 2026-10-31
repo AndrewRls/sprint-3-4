@@ -88,10 +88,21 @@ export interface Credenciais {
   senha: string
 }
 
-// Dados enviados no cadastro (POST /usuarios)
+// Dados enviados no cadastro (POST /usuarios).
+// O back-end exige todos os contadores no JSON, mesmo zerados.
 export type NovoUsuario = Pick<
   UsuarioApi,
-  'nome' | 'cpf' | 'apelido' | 'email' | 'sexo' | 'idade'
+  | 'nome'
+  | 'cpf'
+  | 'apelido'
+  | 'email'
+  | 'sexo'
+  | 'idade'
+  | 'pontos'
+  | 'curtidas'
+  | 'qntPosts'
+  | 'seguidores'
+  | 'seguindo'
 > & {
   senha: string
   endereco: Endereco
