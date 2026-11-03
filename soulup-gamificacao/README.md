@@ -5,9 +5,6 @@ A SoulUp usa gamificação (posts, pontos, níveis e ranking) para incentivar pr
 
 Na Sprint 4 o front-end passou a **consumir a API REST em Java (Spring Boot), publicada na nuvem**, com cadastro e login reais, mural de posts, ranking de usuários, perfil e exclusão de conta.
 
-<p align="center">
-  <img src="soulup-gamificacao/src/assets/imagens/img-01-logo.png" alt="Logo SoulUp" width="220" />
-</p>
 
 ---
 
@@ -106,6 +103,7 @@ git clone https://github.com/AndrewRls/sprint-3-4.git
 cd sprint-3-4/soulup-gamificacao
 
 # 2. Configurar a URL da API
+#renomear ou copiar o arquivo .env.example para .env
 cp .env.example .env      # no Windows: copy .env.example .env
 # edite o .env: VITE_API_URL=https://soulup-projeto-gamefica-o.onrender.com
 
@@ -129,12 +127,12 @@ npm run dev               # http://localhost:5173
 
 ## 👥 Autores e Créditos
 
-| Foto | Nome | RM | Turma | GitHub | LinkedIn |
-|---|---|---|---|---|---|
-| <img src="soulup-gamificacao/src/assets/imagens/img-07-andrew-foto.png" width="70" alt="Andrew" /> | Andrew Rodrigues Lima da Silva | 573777 | 1TDSPF | [AndrewRls](https://github.com/AndrewRls) | [LinkedIn](https://www.linkedin.com/in/andrew-rls) |
-| <img src="soulup-gamificacao/src/assets/imagens/img-05-bryan-foto.png" width="70" alt="Bryan" /> | Bryan Costa Silva | 569439 | 1TDSPF | [BryanC0staDev](https://github.com/BryanC0staDev) | [LinkedIn](https://www.linkedin.com/in/bryan-costa-silva/) |
-| <img src="soulup-gamificacao/src/assets/imagens/img-06-luis-foto.png" width="70" alt="Luis" /> | Luis Henrique Rondão Mendonça | 569797 | 1TDSPF | [luishdev0](https://github.com/luishdev0) | [LinkedIn](https://www.linkedin.com/in/luis-rondao) |
-| <img src="soulup-gamificacao/src/assets/imagens/img-08-igor-foto.jpg" width="70" alt="Igor" /> | Igor Blacconaro Santos | 572033 | 1TDSPF | [igorblacconaro](https://github.com/igorblacconaro) | [LinkedIn](https://www.linkedin.com/in/igorblacconaro) |
+| Nome | RM | Turma | GitHub | LinkedIn |
+|---|---|---|---|---|
+| Andrew Rodrigues Lima da Silva | 573777 | 1TDSPF | [AndrewRls](https://github.com/AndrewRls) | [LinkedIn](https://www.linkedin.com/in/andrew-rls) |
+| Bryan Costa Silva | 569439 | 1TDSPF | [BryanC0staDev](https://github.com/BryanC0staDev) | [LinkedIn](https://www.linkedin.com/in/bryan-costa-silva/) |
+| Luis Henrique Rondão Mendonça | 569797 | 1TDSPO | [luishdev0](https://github.com/luishdev0) | [LinkedIn](https://www.linkedin.com/in/luis-rondao) |
+| Igor Blacconaro Santos | 572033 | 1TDSPF | [igorblacconaro](https://github.com/igorblacconaro) | [LinkedIn](https://www.linkedin.com/in/igorblacconaro) |
 
 ---
 
