@@ -16,7 +16,6 @@ interface Integrante {
   linkedin: string
 }
 
-// ⚠️ TROQUE pela turma real do grupo (ex.: '1TDSPZ')
 const TURMA = '1TDSPF'
 
 const integrantes: Integrante[] = [
@@ -32,7 +31,7 @@ const integrantes: Integrante[] = [
   {
     nome: 'Luis Henrique Rondão Mendonça',
     rm: '569797',
-    turma: TURMA,
+    turma: '1TDSPO',
     cargo: 'Desenvolvedor',
     imagem: luis,
     github: 'https://github.com/luishdev0',
