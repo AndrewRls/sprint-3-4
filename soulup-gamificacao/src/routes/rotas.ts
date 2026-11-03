@@ -8,12 +8,10 @@ export const ROTAS = {
   solucao: '/solucao',
   ranking: '/ranking',
   perfil: '/perfil',
-  novaMissao: '/solucao/nova',
   novoPost: '/solucao/nova',
   login: '/login',
   cadastro: '/cadastro',
-  // rotas dinâmicas (recebem parâmetro)
-  detalheMissao: (id: number | string) => `/solucao/${id}`,
-  editarMissao: (id: number | string) => `/solucao/${id}/editar`,
+  // rota dinâmica: o padrão (para o <Route>) e a função que monta o link
+  padraoDetalhePost: '/solucao/:id',
   detalhePost: (id: number | string) => `/solucao/${id}`,
 } as const

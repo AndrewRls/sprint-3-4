@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import Perfil from './pages/Perfil/Perfil'
+
 import AuthProvider from './context/AuthProvider'
 import MainLayout from './components/MainLayout/MainLayout'
 import RotaProtegida from './components/RotaProtegida/RotaProtegida'
 import { ROTAS } from './routes/rotas'
-import Ranking from './pages/Ranking/Ranking'
+
 import Home from './pages/Home/Home'
 import Sobre from './pages/Sobre/Sobre'
 import Integrantes from './pages/Integrantes/Integrantes'
@@ -13,6 +13,8 @@ import Contato from './pages/Contato/Contato'
 import Solucao from './pages/Solucao/Solucao'
 import SolucaoDetalhe from './pages/SolucaoDetalhe/SolucaoDetalhe'
 import SolucaoForm from './pages/SolucaoForm/SolucaoForm'
+import Ranking from './pages/Ranking/Ranking'
+import Perfil from './pages/Perfil/Perfil'
 import Login from './pages/Login/Login'
 import Cadastro from './pages/Cadastro/Cadastro'
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado'
@@ -32,9 +34,19 @@ function App() {
             <Route path={ROTAS.login} element={<Login />} />
             <Route path={ROTAS.cadastro} element={<Cadastro />} />
 
-            {/* Solução (consome a API) */}
+            {/* Solução (consome a API Java) */}
             <Route path={ROTAS.solucao} element={<Solucao />} />
             <Route path={ROTAS.ranking} element={<Ranking />} />
+
+            {/* Rotas protegidas: exigem login */}
+            <Route
+              path={ROTAS.novoPost}
+              element={
+                <RotaProtegida>
+                  <SolucaoForm />
+                </RotaProtegida>
+              }
+            />
             <Route
               path={ROTAS.perfil}
               element={
@@ -43,29 +55,13 @@ function App() {
                 </RotaProtegida>
               }
             />
-            <Route
-              path={ROTAS.novaMissao}
-              element={
-                <RotaProtegida>
-                  <SolucaoForm />
-                </RotaProtegida>
-              }
-            />
 
-            {/* Rotas dinâmicas (parâmetro :id) */}
-            <Route path="/solucao/:id" element={<SolucaoDetalhe />} />
-            <Route
-              path="/solucao/:id/editar"
-              element={
-                <RotaProtegida>
-                  <SolucaoForm />
-                </RotaProtegida>
-              }
-            />
+            {/* Rota dinâmica (parâmetro :id) */}
+            <Route path={ROTAS.padraoDetalhePost} element={<SolucaoDetalhe />} />
 
             {/* Redirecionamentos e página 404 */}
             <Route path="/home" element={<Navigate to={ROTAS.home} replace />} />
-            <Route path="/missoes" element={<Navigate to={ROTAS.solucao} replace />} />
+            <Route path="/posts" element={<Navigate to={ROTAS.solucao} replace />} />
             <Route path="*" element={<NaoEncontrado />} />
           </Routes>
         </MainLayout>
