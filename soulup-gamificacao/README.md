@@ -98,7 +98,7 @@ Na Sprint 4 o front-end passou a **consumir a API REST em Java (Spring Boot), pu
 | Item | Link |
 |---|---|
 | 💻 Repositório GitHub | https://github.com/AndrewRls/sprint-3-4 |
-| 🌐 Deploy na Vercel | **PREENCHER: https://SEU-PROJETO.vercel.app** |
+| 🌐 Deploy na Vercel | https://sprint-3-4-rho.vercel.app/ |
 | 🎥 Vídeo no YouTube | **PREENCHER: https://youtu.be/XXXXXXXX** |
 | ☕ API Java publicada (Render) | https://soulup-projeto-gamefica-o.onrender.com |
 | ☕ Repositório do back-end | **PREENCHER: link do GitHub do projeto Java** |
