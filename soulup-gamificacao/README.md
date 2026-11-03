@@ -36,24 +36,24 @@ Na Sprint 4 o front-end passou a **consumir a API REST em Java (Spring Boot), pu
 ┣ 📄 README.md
 ┣ 🖼️ Fluxograma.png
 ┗ 📂 soulup-gamificacao
-  ┣ 📂 public                  # favicon
+  ┣ 📂 public                  
   ┣ 📂 src
   ┃ ┣ 📂 assets/imagens
-  ┃ ┣ 📂 components            # Header, Footer, Card, Button, SectionTitle, MainLayout,
-  ┃ ┃                          # PostCard, PostForm, Feedback (loading/erro/vazio), RotaProtegida
-  ┃ ┣ 📂 context               # AuthContext + AuthProvider (useContext)
-  ┃ ┣ 📂 hooks                 # useRequisicao, usePosts/usePost, useRanking, useAuth
-  ┃ ┣ 📂 pages                 # Home, Sobre, Integrantes, FAQ, Contato, Solucao, SolucaoDetalhe,
-  ┃ ┃                          # SolucaoForm, Ranking, Perfil, Login, Cadastro, NaoEncontrado
-  ┃ ┣ 📂 routes                # rotas.ts (todas as rotas em um só lugar)
-  ┃ ┣ 📂 services              # api.ts (fetch), postService.ts, usuarioService.ts, authService.ts
-  ┃ ┣ 📂 types                 # interfaces e tipos (Union / Intersection)
-  ┃ ┣ 📂 utils                 # nivel.ts (nível pelo número de pontos)
+  ┃ ┣ 📂 components            
+  ┃ ┃                          
+  ┃ ┣ 📂 context               
+  ┃ ┣ 📂 hooks               
+  ┃ ┣ 📂 pages                 
+  ┃ ┃                          
+  ┃ ┣ 📂 routes                
+  ┃ ┣ 📂 services              
+  ┃ ┣ 📂 types                 
+  ┃ ┣ 📂 utils                 
   ┃ ┣ 📄 App.tsx
   ┃ ┣ 📄 main.tsx
   ┃ ┗ 📄 index.css
-  ┣ 📄 .env.example            # modelo da variável VITE_API_URL
-  ┣ 📄 vercel.json             # rewrite para SPA na Vercel
+  ┣ 📄 .env.example        
+  ┣ 📄 vercel.json             
   ┣ 📄 index.html
   ┣ 📄 package.json
   ┗ 📄 vite.config.ts
@@ -77,17 +77,10 @@ Na Sprint 4 o front-end passou a **consumir a API REST em Java (Spring Boot), pu
 
 ---
 
-## 🖼️ Imagens do Projeto
 
-### Fluxograma da solução
-![Fluxograma da solução](Fluxograma.png)
 
 ### Ícones e telas
-<p>
-  <img src="soulup-gamificacao/src/assets/imagens/img-04-ranking.jpg" alt="Ranking" height="120" />
-  <img src="soulup-gamificacao/src/assets/imagens/img-12-pontuacao.jpg" alt="Pontuação" height="120" />
-  <img src="soulup-gamificacao/src/assets/imagens/img-14-login.jpg" alt="Login" height="120" />
-</p>
+![alt text](<Captura de tela 2026-11-02 213621.png>)
 
 ---
 
@@ -101,7 +94,7 @@ Na Sprint 4 o front-end passou a **consumir a API REST em Java (Spring Boot), pu
 | 🌐 Deploy na Vercel | https://sprint-3-4-rho.vercel.app/ |
 | 🎥 Vídeo no YouTube | **PREENCHER: https://youtu.be/XXXXXXXX** |
 | ☕ API Java publicada (Render) | https://soulup-projeto-gamefica-o.onrender.com |
-| ☕ Repositório do back-end | **PREENCHER: link do GitHub do projeto Java** |
+| ☕ Repositório do back-end | https://github.com/BryanC0staDev/SoulUp-Projeto-Gamefica-o |
 
 > A API usa o plano gratuito do Render: na **primeira requisição** ela pode levar até 1 minuto para "acordar".
 
@@ -132,14 +125,7 @@ npm run dev               # http://localhost:5173
 | GET | `/usuarios/ranking` | Ranking de usuários |
 | DELETE | `/usuarios/{cpf}` | Excluir a própria conta |
 
-### ☁️ Deploy na Vercel
 
-1. Importe o repositório na Vercel.
-2. **Root Directory:** `soulup-gamificacao`.
-3. Em *Environment Variables*, crie `VITE_API_URL` com a URL da API: `https://soulup-projeto-gamefica-o.onrender.com` (sem barra no final).
-4. Faça o deploy. O `vercel.json` garante que rotas como `/solucao/1` funcionem ao recarregar a página.
-
----
 
 ## 👥 Autores e Créditos
 
